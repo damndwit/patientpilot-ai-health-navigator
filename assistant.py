@@ -134,7 +134,7 @@ def offline_answer(evidence: tuple[Evidence, ...]) -> Answer:
 
 
 def answer_question(bundle: dict, patient_id: str, question: str, api_key: str = "",
-                    model: str = "gemini-3.1-flash-lite", client=None) -> Answer:
+                    model: str = "gemini-2.5-flash-lite", client=None) -> Answer:
     question = question.strip()[:600]
     if not question:
         return Answer("Enter a question about the selected fictional patient's records.")
