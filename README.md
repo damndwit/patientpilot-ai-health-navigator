@@ -1,6 +1,6 @@
 # PatientPilot AI — Healthcare Navigation Web App
 
-**Milestone 4 prototype: Patient portal, record-grounded chatbot and simulated care actions**
+**Current prototype: patient portal, AI record assistant, consent-based workflows, FHIR sandbox explorer and care navigation**
 
 PatientPilot is a portfolio project exploring a single place to navigate patient information, care coordination, and eventually AI-assisted healthcare tasks. The current implementation includes a **read-only Streamlit dashboard with fictional FHIR-style health records** and a patient-specific chatbot. The chatbot works offline with retrieved facts; optional Gemini AI can explain those facts using a configured API key. An approval-controlled Care Actions interface simulates administrative requests. **No real healthcare systems are connected and no messages or requests are sent.**
 
@@ -14,7 +14,9 @@ PatientPilot is a portfolio project exploring a single place to navigate patient
 - Explore structured JSON data modeled on FHIR resources.
 - Prepare fictional appointment inquiries, refill inquiries, clinic messages and insurance questions; explicitly approve or reject a draft.
 - Review and download an **in-memory, patient-scoped demo audit log**; simulated approval never books an appointment or sends a request.
-- Run automated data-access and approval-gate tests via GitHub Actions.
+- Explore a public read-only SMART Health IT FHIR R4 synthetic sandbox in a separate tab (network availability permitting).
+- Prepare public Google Maps hospital searches and driving directions without sending patient records or booking a ride.
+- Run automated patient-isolation, consent and integration-client tests via GitHub Actions.
 
 ### Safety and privacy
 
@@ -64,6 +66,10 @@ python -m streamlit run app.py
 - `care_ui.py` — administrative request preparation, review, consent, and demo audit log
 - `workflows.py` — deterministic action validation, optional LLM intent suggestion and patient isolation
 - `tests/test_workflows.py` — consent, isolation and no-side-effect tests
+- `fhir_sandbox.py` — read-only bounded SMART Health IT public FHIR R4 client
+- `navigation.py` — public map search and route URL helpers
+- `navigation_ui.py` — FHIR explorer and navigation interface
+- `tests/test_integrations.py` — mock FHIR and navigation URL tests
 - `assistant.py` — source-grounded chatbot and optional Gemini integration
 - `tests/test_assistant.py` — patient isolation, fallback, and retrieval tests
 - `records.py` — synthetic resource parsing, patient scoping and keyword search
@@ -83,13 +89,19 @@ python -m streamlit run app.py
 
 No action contacts a clinic, pharmacy, insurer, or emergency service. The approval exists **only in your current browser session**, not in a persistent health system.
 
+## FHIR sandbox and care navigation
+
+The **🔗 FHIR Sandbox** tab queries only the public synthetic endpoint at `https://r4.smarthealthit.org` using allowlisted read-only GET requests with capped response sizes. It reads the test server's FHIR CapabilityStatement and lets you inspect up to five test patients and up to five associated observations. This data **does not become part of the local patient chart**, and the sandbox patient records are not real healthcare data. If the sandbox is unavailable, the rest of the app keeps working.
+
+The **🧭 Care Navigation** tab offers a user-entered city/ZIP hospital search and user-entered origin/destination driving-directions link using Google Maps URLs. It displays demo appointments and fictional emergency contacts. It **cannot** identify an in-network hospital, guarantee operating hours, reserve a taxi, notify a clinic, or send data to healthcare systems. Google Maps opens externally; users should avoid entering sensitive patient information.
+
 ## Planned milestones
 
 - [x] **1. Patient dashboard:** synthetic patients, labs, medications, encounters, coverage, appointments, contacts and keyword search
 - [x] **2. Record-grounded assistant:** patient-specific sourced lookup works without an API key. Optional Gemini integration is implemented but requires key configuration and live testing.
-- [ ] **3. FHIR sandbox:** demonstrate authorized integration using publicly available test data
+- [x] **3. FHIR sandbox demo:** implement read-only synthetic test-server exploration. Public connectivity remains dependent on sandbox availability.
 - [x] **4. Approval-controlled simulated actions:** request classification, drafts, explicit approve/reject decisions and in-session audit records. Nothing is actually submitted.
-- [ ] **5. Care navigation:** demonstration of hospital lookup, contacts, and ride-planning concepts
+- [x] **5. Care navigation MVP:** hospital search and driving-directions links, fictional appointments and emergency contacts; no ride booking.
 - [ ] **6. Deployment & portfolio proof:** deploy public demo, screenshots, architecture, and passing tests
 
 ## Stack and learning references
