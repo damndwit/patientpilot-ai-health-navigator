@@ -1,8 +1,18 @@
 # PatientPilot AI — Healthcare Navigation Web App
 
+**[Deployment instructions](DEPLOYMENT.md)** · **[Architecture](ARCHITECTURE.md)** · **[Automated tests](https://github.com/damndwit/patientpilot-ai-health-navigator/actions)**
+
+> **Portfolio prototype — synthetic data only.** Not a clinical product or patient care service. No actual appointments, prescriptions, insurance transactions, or transportation bookings.
+
 **Current prototype: patient portal, AI record assistant, consent-based workflows, FHIR sandbox explorer and care navigation**
 
 PatientPilot is a portfolio project exploring a single place to navigate patient information, care coordination, and eventually AI-assisted healthcare tasks. The current implementation includes a **read-only Streamlit dashboard with fictional FHIR-style health records** and a patient-specific chatbot. The chatbot works offline with retrieved facts; optional Gemini AI can explain those facts using a configured API key. An approval-controlled Care Actions interface simulates administrative requests. **No real healthcare systems are connected and no messages or requests are sent.**
+
+## Portfolio highlight
+
+Built a modular Python/Streamlit prototype combining record-grounded AI question answering, synthetic FHIR-style patient charts, read-only public FHIR sandbox exploration and patient-consent-gated **simulated** administrative workflows. The app is designed to be reviewed in a browser and discussed with source code and automated tests.
+
+**Public hosting:** Deployment instructions are ready; the public URL is not yet verified.
 
 ## Current functionality
 
@@ -23,6 +33,15 @@ PatientPilot is a portfolio project exploring a single place to navigate patient
 **Synthetic data only.** There are no real patients, insurance accounts, doctors, clinics, pharmacy connections, live appointment bookings, ride bookings, or prescription requests. This is not a medical device or a production healthcare platform and must not be used for diagnosis, treatment or emergency response. Do not upload private patient records or enter identifying health information into a public demo.
 
 The repository contains FHIR-*style* resources for learning. It has not been validated as fully conformant FHIR or connected to a FHIR server.
+
+## Quick demonstration
+
+1. Choose Alex Morgan or Jamie Brooks (fictional).
+2. Ask **“What was my last cholesterol result?”** and inspect the cited local record IDs.
+3. Explore labs, medications, appointments and coverage without leaving the app.
+4. Open **Care Actions**, draft an appointment request, explicitly approve it, and view the in-session audit event. **Nothing is sent.**
+5. Try **FHIR Sandbox** to inspect a separate synthetic public test server.
+6. Try **Care Navigation** to open hospital search or driving directions in Maps.
 
 ## Getting started
 
@@ -59,6 +78,10 @@ Install requirements and restart Streamlit after pulling the latest code:
 python -m pip install -r requirements.txt
 python -m streamlit run app.py
 ```
+
+## Screenshots
+
+Screenshots of the **final deployed interface** are pending. We'll add genuine screenshots captured from the live application rather than fabricated interface images. The app can be run locally while preparing them.
 
 ## Project files
 
@@ -102,7 +125,18 @@ The **🧭 Care Navigation** tab offers a user-entered city/ZIP hospital search 
 - [x] **3. FHIR sandbox demo:** implement read-only synthetic test-server exploration. Public connectivity remains dependent on sandbox availability.
 - [x] **4. Approval-controlled simulated actions:** request classification, drafts, explicit approve/reject decisions and in-session audit records. Nothing is actually submitted.
 - [x] **5. Care navigation MVP:** hospital search and driving-directions links, fictional appointments and emergency contacts; no ride booking.
-- [ ] **6. Deployment & portfolio proof:** deploy public demo, screenshots, architecture, and passing tests
+- [ ] **6. Deployment & portfolio proof:** deployment and architecture docs complete; public Streamlit deployment, final screenshots and live acceptance testing pending
+
+## Resume-ready project summary
+
+**PatientPilot AI — Healthcare Navigation Web App** | Python, Streamlit, Gemini API, JSON/FHIR-style resources, GitHub Actions
+
+- Developed a multi-patient healthcare demonstration dashboard backed by fictional FHIR-style records, including lab reports, medications, appointments, insurance data and record-scoped search.
+- Integrated optional Gemini-based record-grounded question answering with cited evidence, offline fallback and explicit separation of synthetic data from public FHIR sandbox results.
+- Implemented consent-gated administrative request simulations for appointments, refills and insurer messages, with patient-scoped checks, no outbound side effects and an in-session audit trail.
+- Added a read-only SMART Health IT FHIR R4 sandbox explorer, hospital search/directions links, automated Python tests and software architecture documentation.
+
+Use only claims you can personally demonstrate; **do not claim** real healthcare system integrations, actual prescription refills, HIPAA compliance, clinical accuracy or genuine bookings.
 
 ## Stack and learning references
 
