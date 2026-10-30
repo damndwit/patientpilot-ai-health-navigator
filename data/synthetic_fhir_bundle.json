@@ -1,0 +1,713 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "id": "patientpilot-synthetic-demo",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://example.org/patientpilot",
+        "code": "SYNTHETIC-DEMO-ONLY",
+        "display": "Entire dataset is fabricated for UI demonstration"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:organization-org-demo-clinic",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "org-demo-clinic",
+        "active": true,
+        "name": "Cedar Grove Family Clinic (Demo)",
+        "type": [
+          {
+            "text": "Fictional primary care clinic"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:practitioner-prac-hayes",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "prac-hayes",
+        "active": true,
+        "name": [
+          {
+            "given": [
+              "Jordan"
+            ],
+            "family": "Hayes",
+            "prefix": [
+              "Dr."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:practitioner-prac-chen",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "prac-chen",
+        "active": true,
+        "name": [
+          {
+            "given": [
+              "Taylor"
+            ],
+            "family": "Chen",
+            "prefix": [
+              "Dr."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:patient-alex-demo",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "alex-demo",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "given": [
+              "Alex"
+            ],
+            "family": "Morgan"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1988-05-14",
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "Emergency contact"
+              }
+            ],
+            "name": {
+              "given": [
+                "Casey"
+              ],
+              "family": "Morgan"
+            },
+            "telecom": [
+              {
+                "system": "phone",
+                "value": "555-0100",
+                "use": "mobile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:patient-jamie-demo",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "jamie-demo",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "given": [
+              "Jamie"
+            ],
+            "family": "Brooks"
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1992-11-02",
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "Emergency contact"
+              }
+            ],
+            "name": {
+              "given": [
+                "Riley"
+              ],
+              "family": "Brooks"
+            },
+            "telecom": [
+              {
+                "system": "phone",
+                "value": "555-0160",
+                "use": "mobile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:encounter-enc-alex",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "enc-alex",
+        "status": "finished",
+        "class": {
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "subject": {
+          "reference": "Patient/alex-demo"
+        },
+        "period": {
+          "start": "2026-08-12T10:00:00-04:00",
+          "end": "2026-08-12T10:30:00-04:00"
+        },
+        "reasonCode": [
+          {
+            "text": "Routine follow-up",
+            "coding": []
+          }
+        ],
+        "serviceProvider": {
+          "reference": "Organization/org-demo-clinic"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:encounter-enc-jamie",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "enc-jamie",
+        "status": "finished",
+        "class": {
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "subject": {
+          "reference": "Patient/jamie-demo"
+        },
+        "period": {
+          "start": "2026-09-03T13:00:00-04:00",
+          "end": "2026-09-03T13:25:00-04:00"
+        },
+        "reasonCode": [
+          {
+            "text": "Annual checkup",
+            "coding": []
+          }
+        ],
+        "serviceProvider": {
+          "reference": "Organization/org-demo-clinic"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-cond-alex-1",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond-alex-1",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Hypertension (synthetic example)",
+          "coding": []
+        },
+        "subject": {
+          "reference": "Patient/alex-demo"
+        },
+        "onsetDateTime": "2024-04-18"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-cond-jamie-1",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond-jamie-1",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Seasonal allergic rhinitis (synthetic example)",
+          "coding": []
+        },
+        "subject": {
+          "reference": "Patient/jamie-demo"
+        },
+        "onsetDateTime": "2023-05-02"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:allergyintolerance-alg-alex-1",
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "alg-alex-1",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "patient": {
+          "reference": "Patient/alex-demo"
+        },
+        "code": {
+          "text": "Penicillin (synthetic example)",
+          "coding": []
+        },
+        "reaction": [
+          {
+            "manifestation": [
+              {
+                "text": "Hives",
+                "coding": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:allergyintolerance-alg-jamie-1",
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "alg-jamie-1",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "patient": {
+          "reference": "Patient/jamie-demo"
+        },
+        "code": {
+          "text": "No recorded drug allergies (demo record)",
+          "coding": []
+        },
+        "reaction": [
+          {
+            "manifestation": [
+              {
+                "text": "Unspecified",
+                "coding": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:medicationrequest-med-alex-1",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "med-alex-1",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Lisinopril 10 mg tablet (synthetic example)",
+          "coding": []
+        },
+        "subject": {
+          "reference": "Patient/alex-demo"
+        },
+        "authoredOn": "2026-08-12",
+        "requester": {
+          "reference": "Practitioner/prac-hayes"
+        },
+        "dosageInstruction": [
+          {
+            "text": "Demo medication information only; follow prescriber's instructions."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:medicationrequest-med-jamie-1",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "med-jamie-1",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Cetirizine 10 mg tablet (synthetic example)",
+          "coding": []
+        },
+        "subject": {
+          "reference": "Patient/jamie-demo"
+        },
+        "authoredOn": "2026-09-03",
+        "requester": {
+          "reference": "Practitioner/prac-hayes"
+        },
+        "dosageInstruction": [
+          {
+            "text": "Demo medication information only; follow prescriber's instructions."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:observation-obs-alex-chol-1",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-alex-chol-1",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Total cholesterol",
+          "coding": []
+        },
+        "subject": {
+          "reference": "Patient/alex-demo"
+        },
+        "effectiveDateTime": "2026-02-14",
+        "valueQuantity": {
+          "value": 190,
+          "unit": "mg/dL"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:observation-obs-alex-chol-2",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-alex-chol-2",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Total cholesterol",
+          "coding": []
+        },
+        "subject": {
+          "reference": "Patient/alex-demo"
+        },
+        "effectiveDateTime": "2026-08-12",
+        "valueQuantity": {
+          "value": 181,
+          "unit": "mg/dL"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:observation-obs-alex-glu-1",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-alex-glu-1",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Blood glucose",
+          "coding": []
+        },
+        "subject": {
+          "reference": "Patient/alex-demo"
+        },
+        "effectiveDateTime": "2026-08-12",
+        "valueQuantity": {
+          "value": 94,
+          "unit": "mg/dL"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:observation-obs-alex-a1c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-alex-a1c",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Hemoglobin A1c",
+          "coding": []
+        },
+        "subject": {
+          "reference": "Patient/alex-demo"
+        },
+        "effectiveDateTime": "2026-08-12",
+        "valueQuantity": {
+          "value": 5.3,
+          "unit": "%"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:observation-obs-jamie-chol",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-jamie-chol",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Total cholesterol",
+          "coding": []
+        },
+        "subject": {
+          "reference": "Patient/jamie-demo"
+        },
+        "effectiveDateTime": "2026-09-03",
+        "valueQuantity": {
+          "value": 175,
+          "unit": "mg/dL"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:observation-obs-jamie-glu",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-jamie-glu",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Blood glucose",
+          "coding": []
+        },
+        "subject": {
+          "reference": "Patient/jamie-demo"
+        },
+        "effectiveDateTime": "2026-09-03",
+        "valueQuantity": {
+          "value": 92,
+          "unit": "mg/dL"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:diagnosticreport-report-alex-1",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "report-alex-1",
+        "status": "final",
+        "code": {
+          "text": "Routine laboratory panel (Demo)",
+          "coding": []
+        },
+        "subject": {
+          "reference": "Patient/alex-demo"
+        },
+        "effectiveDateTime": "2026-08-12",
+        "issued": "2026-08-12",
+        "conclusion": "Sample lab values for software demonstration only; no clinical interpretation.",
+        "result": [
+          {
+            "reference": "Observation/obs-alex-chol-2"
+          },
+          {
+            "reference": "Observation/obs-alex-glu-1"
+          },
+          {
+            "reference": "Observation/obs-alex-a1c"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:diagnosticreport-report-jamie-1",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "report-jamie-1",
+        "status": "final",
+        "code": {
+          "text": "Annual laboratory panel (Demo)",
+          "coding": []
+        },
+        "subject": {
+          "reference": "Patient/jamie-demo"
+        },
+        "effectiveDateTime": "2026-09-03",
+        "issued": "2026-09-03",
+        "conclusion": "Synthetic results only; consult a qualified clinician for real health decisions.",
+        "result": [
+          {
+            "reference": "Observation/obs-jamie-chol"
+          },
+          {
+            "reference": "Observation/obs-jamie-glu"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:appointment-appt-alex-1",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appt-alex-1",
+        "description": "2026-11-12T09:30:00-05:00",
+        "start": "2026-11-12T10:00:00-05:00",
+        "end": "booked",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/alex-demo"
+            },
+            "status": "accepted"
+          },
+          {
+            "actor": {
+              "reference": "Practitioner/Routine primary care follow-up"
+            },
+            "status": "accepted"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:appointment-appt-jamie-1",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appt-jamie-1",
+        "description": "2026-11-19T14:00:00-05:00",
+        "start": "2026-11-19T14:30:00-05:00",
+        "end": "booked",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/jamie-demo"
+            },
+            "status": "accepted"
+          },
+          {
+            "actor": {
+              "reference": "Practitioner/Allergy follow-up"
+            },
+            "status": "accepted"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:coverage-cov-alex",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "cov-alex",
+        "status": "active",
+        "beneficiary": {
+          "reference": "Patient/alex-demo"
+        },
+        "payor": [
+          {
+            "display": "Example Insurance Company (Fictional)"
+          }
+        ],
+        "class": [
+          {
+            "type": {
+              "text": "plan"
+            },
+            "value": "DEMO",
+            "name": "Sample Silver PPO"
+          }
+        ],
+        "period": {
+          "start": "2026-01-01",
+          "end": "2026-12-31"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:coverage-cov-jamie",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "cov-jamie",
+        "status": "active",
+        "beneficiary": {
+          "reference": "Patient/jamie-demo"
+        },
+        "payor": [
+          {
+            "display": "Example Insurance Company (Fictional)"
+          }
+        ],
+        "class": [
+          {
+            "type": {
+              "text": "plan"
+            },
+            "value": "DEMO",
+            "name": "Sample Essential Plan"
+          }
+        ],
+        "period": {
+          "start": "2026-01-01",
+          "end": "2026-12-31"
+        }
+      }
+    }
+  ]
+}
