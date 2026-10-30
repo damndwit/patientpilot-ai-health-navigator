@@ -1,6 +1,6 @@
 # PatientPilot AI — Healthcare Navigation Web App
 
-**[Deployment instructions](DEPLOYMENT.md)** · **[Architecture](ARCHITECTURE.md)** · **[Automated tests](https://github.com/damndwit/patientpilot-ai-health-navigator/actions)**
+**[▶ Try the public demo](https://patientpilot-ai-dwit.streamlit.app/)** · **[Architecture](ARCHITECTURE.md)** · **[Deployment guide](DEPLOYMENT.md)** · **[CI tests](https://github.com/damndwit/patientpilot-ai-health-navigator/actions)**
 
 > **Portfolio prototype — synthetic data only.** Not a clinical product or patient care service. No actual appointments, prescriptions, insurance transactions, or transportation bookings.
 
@@ -12,7 +12,7 @@ PatientPilot is a portfolio project exploring a single place to navigate patient
 
 Built a modular Python/Streamlit prototype combining record-grounded AI question answering, synthetic FHIR-style patient charts, read-only public FHIR sandbox exploration and patient-consent-gated **simulated** administrative workflows. The app is designed to be reviewed in a browser and discussed with source code and automated tests.
 
-**Public hosting:** Deployment instructions are ready; the public URL is not yet verified.
+**Public demo:** [patientpilot-ai-dwit.streamlit.app](https://patientpilot-ai-dwit.streamlit.app/) — deployed by the project owner. The hosted app's full acceptance-test checklist is still pending independent confirmation.
 
 ## Current functionality
 
@@ -81,7 +81,21 @@ python -m streamlit run app.py
 
 ## Screenshots
 
-Screenshots of the **final deployed interface** are pending. We'll add genuine screenshots captured from the live application rather than fabricated interface images. The app can be run locally while preparing them.
+The following three screenshots were uploaded from the application on October 30, 2026. The filename numbers are used only to distinguish the images.
+
+**Application screenshot 1**
+
+![PatientPilot app screenshot 1](Screenshot%202026-10-30%20002839.png)
+
+**Application screenshot 2**
+
+![PatientPilot app screenshot 2](Screenshot%202026-10-30%20003010.png)
+
+**Application screenshot 3**
+
+![PatientPilot app screenshot 3](Screenshot%202026-10-30%20003047.png)
+
+> Screenshots illustrate the demo application, not actual clinical workflows. All depicted patient records should be fictional. If a screenshot contains secrets or identifying personal information, remove it immediately and rotate any exposed API keys.
 
 ## Project files
 
@@ -125,7 +139,7 @@ The **🧭 Care Navigation** tab offers a user-entered city/ZIP hospital search 
 - [x] **3. FHIR sandbox demo:** implement read-only synthetic test-server exploration. Public connectivity remains dependent on sandbox availability.
 - [x] **4. Approval-controlled simulated actions:** request classification, drafts, explicit approve/reject decisions and in-session audit records. Nothing is actually submitted.
 - [x] **5. Care navigation MVP:** hospital search and driving-directions links, fictional appointments and emergency contacts; no ride booking.
-- [ ] **6. Deployment & portfolio proof:** deployment and architecture docs complete; public Streamlit deployment, final screenshots and live acceptance testing pending
+- [x] **6. Deployment & portfolio evidence:** public app URL, three screenshots, architecture and deployment documentation, plus passing GitHub Actions tests. Final hosted-app smoke testing remains recommended.
 
 ## Resume-ready project summary
 
