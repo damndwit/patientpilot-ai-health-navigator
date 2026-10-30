@@ -1,8 +1,8 @@
 # PatientPilot AI — Healthcare Navigation Web App
 
-**Milestone 2: Patient portal + record-grounded chatbot (prototype)**
+**Milestone 4 prototype: Patient portal, record-grounded chatbot and simulated care actions**
 
-PatientPilot is a portfolio project exploring a single place to navigate patient information, care coordination, and eventually AI-assisted healthcare tasks. The current implementation includes a **read-only Streamlit dashboard with fictional FHIR-style health records** and a patient-specific chatbot. The chatbot works offline with retrieved facts; optional Gemini AI can explain those facts using a configured API key. No real healthcare systems are connected.
+PatientPilot is a portfolio project exploring a single place to navigate patient information, care coordination, and eventually AI-assisted healthcare tasks. The current implementation includes a **read-only Streamlit dashboard with fictional FHIR-style health records** and a patient-specific chatbot. The chatbot works offline with retrieved facts; optional Gemini AI can explain those facts using a configured API key. An approval-controlled Care Actions interface simulates administrative requests. **No real healthcare systems are connected and no messages or requests are sent.**
 
 ## Current functionality
 
@@ -12,7 +12,9 @@ PatientPilot is a portfolio project exploring a single place to navigate patient
 - Search available records using local keyword matching, and ask questions using a homepage chatbot with cited synthetic record IDs.
 - Optional Gemini 2.5 Flash-Lite explanations using retrieved patient-scoped records and a private API key.
 - Explore structured JSON data modeled on FHIR resources.
-- Run automated data-access tests via GitHub Actions.
+- Prepare fictional appointment inquiries, refill inquiries, clinic messages and insurance questions; explicitly approve or reject a draft.
+- Review and download an **in-memory, patient-scoped demo audit log**; simulated approval never books an appointment or sends a request.
+- Run automated data-access and approval-gate tests via GitHub Actions.
 
 ### Safety and privacy
 
@@ -59,6 +61,9 @@ python -m streamlit run app.py
 ## Project files
 
 - `app.py` — Streamlit patient dashboard, homepage chat, and navigation
+- `care_ui.py` — administrative request preparation, review, consent, and demo audit log
+- `workflows.py` — deterministic action validation, optional LLM intent suggestion and patient isolation
+- `tests/test_workflows.py` — consent, isolation and no-side-effect tests
 - `assistant.py` — source-grounded chatbot and optional Gemini integration
 - `tests/test_assistant.py` — patient isolation, fallback, and retrieval tests
 - `records.py` — synthetic resource parsing, patient scoping and keyword search
@@ -67,12 +72,23 @@ python -m streamlit run app.py
 - `.github/workflows/tests.yml` — automated syntax and unit tests
 - `.streamlit/config.toml` — demo interface theme
 
+## Try the simulated action workflow
+
+1. Open the **🧾 Care Actions** tab and describe a routine appointment or refill inquiry.
+2. Click **Suggest request type**; Gemini may suggest an allowlisted category when configured. Otherwise keyword rules operate without an API key.
+3. Select the request type, enter a short note, and choose the relevant fictional medication if needed.
+4. Click **Prepare draft for my review**. Inspect the recipient, linked synthetic resource, and explicit no-transmission warning.
+5. **Approve demo request** only after checking the consent box, or reject it. Inspect the audit log and optionally download the JSON.
+6. Switch demo patients and verify that the other patient's draft and log are not visible.
+
+No action contacts a clinic, pharmacy, insurer, or emergency service. The approval exists **only in your current browser session**, not in a persistent health system.
+
 ## Planned milestones
 
 - [x] **1. Patient dashboard:** synthetic patients, labs, medications, encounters, coverage, appointments, contacts and keyword search
 - [x] **2. Record-grounded assistant:** patient-specific sourced lookup works without an API key. Optional Gemini integration is implemented but requires key configuration and live testing.
 - [ ] **3. FHIR sandbox:** demonstrate authorized integration using publicly available test data
-- [ ] **4. Approval-controlled simulated actions:** draft appointment and refill inquiries, approve/reject workflow, audit events
+- [x] **4. Approval-controlled simulated actions:** request classification, drafts, explicit approve/reject decisions and in-session audit records. Nothing is actually submitted.
 - [ ] **5. Care navigation:** demonstration of hospital lookup, contacts, and ride-planning concepts
 - [ ] **6. Deployment & portfolio proof:** deploy public demo, screenshots, architecture, and passing tests
 
