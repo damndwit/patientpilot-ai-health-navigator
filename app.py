@@ -1,5 +1,6 @@
 """PatientPilot AI — Milestone 1: synthetic patient record dashboard."""
 import streamlit as st
+from assistant import answer_question
 from records import load_bundle, resources, patient_records, label, date_of, patient_name, plain_search
 
 st.set_page_config(page_title="PatientPilot AI | Demo",page_icon="🩺",layout="wide")
@@ -19,13 +20,51 @@ with st.sidebar:
     selected=st.selectbox("View demo patient",list(options),format_func=lambda x:options[x])
     st.divider()
     st.info("All records are fictional. No connection to real providers, pharmacies, insurers or patients.")
-    st.caption("Milestone 1: patient record dashboard. LLM and approval-controlled agent features are not connected yet.")
+    st.caption("Record-grounded assistant added. Actions and live healthcare integrations are not connected.")
 
 person=next(p for p in patients if p["id"]==selected)
 records=patient_records(bundle,selected)
 def select(kind):return [x for x in records if x.get("resourceType")==kind]
 st.markdown(f'<div class="hero"><div class="tag">DEMO MODE · SYNTHETIC PATIENT</div><h1>Welcome, {patient_name(person).split()[0]}</h1><p>Your records, care tasks and information in one place.</p></div>',unsafe_allow_html=True)
 st.caption(f"Currently viewing: {patient_name(person)} · Fictional ID: {selected} · DOB: {person.get('birthDate','Not recorded')}")
+st.subheader("💬 Ask PatientPilot AI")
+st.caption("Search the selected fictional patient's record. Source citations are included. Optional Gemini answers require an API key; without one, local evidence-based answers still work.")
+if "chat_patient" not in st.session_state or st.session_state.chat_patient != selected:
+    st.session_state.chat_patient = selected
+    st.session_state.chat_history = []
+
+try:
+    api_key = st.secrets.get("GEMINI_API_KEY", "")
+except (FileNotFoundError, KeyError):
+    api_key = ""
+with st.sidebar:
+    st.caption("Assistant mode: " + ("Gemini AI + record retrieval" if api_key else "Local record lookup (no API key)"))
+
+suggested = ["What was my last cholesterol result?", "What medications are in my records?", "When is my next appointment?", "What insurance is listed?"]
+quick = st.columns(2)
+for i, prompt_example in enumerate(suggested):
+    with quick[i % 2]:
+        if st.button(prompt_example, key=f"ask_{selected}_{i}", use_container_width=True):
+            st.session_state.pending_question = prompt_example
+
+with st.container(border=True):
+    for msg in st.session_state.chat_history:
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
+    typed = st.chat_input("Ask about my records, medications, appointments...")
+    question = typed or st.session_state.pop("pending_question", None)
+    if question:
+        with st.chat_message("user"):
+            st.write(question)
+        answer = answer_question(bundle, selected, question, api_key=api_key)
+        with st.chat_message("assistant"):
+            st.markdown(answer.text)
+            st.caption("Mode: " + answer.mode)
+        st.session_state.chat_history.extend([
+            {"role": "user", "content": question},
+            {"role": "assistant", "content": answer.text},
+        ])
+st.divider()
 c1,c2,c3,c4=st.columns(4)
 c1.metric("Recorded conditions",len(select("Condition")))
 c2.metric("Medications",len(select("MedicationRequest")))
@@ -78,7 +117,7 @@ with tabs[4]:
 with tabs[5]:
     st.subheader("Search this patient's records")
     query=st.text_input("Try: cholesterol, refill, follow-up, allergy","")
-    st.caption("Milestone 1 uses keyword matching only; LLM-powered grounded answers come next.")
+    st.caption("Raw keyword lookup. For conversational answers use Ask PatientPilot AI above.")
     if query.strip():
         found=plain_search(records,query)
         if not found:st.info("No matching demo records. Try another keyword.")
