@@ -1,6 +1,7 @@
 """PatientPilot AI — Milestone 1: synthetic patient record dashboard."""
 import streamlit as st
 from assistant import answer_question
+from care_ui import render_care_actions
 from records import load_bundle, resources, patient_records, label, date_of, patient_name, plain_search
 
 st.set_page_config(page_title="PatientPilot AI | Demo",page_icon="🩺",layout="wide")
@@ -20,7 +21,7 @@ with st.sidebar:
     selected=st.selectbox("View demo patient",list(options),format_func=lambda x:options[x])
     st.divider()
     st.info("All records are fictional. No connection to real providers, pharmacies, insurers or patients.")
-    st.caption("Record-grounded assistant added. Actions and live healthcare integrations are not connected.")
+    st.caption("Care Actions offers simulated drafts and approval. No live healthcare integrations.")
 
 person=next(p for p in patients if p["id"]==selected)
 records=patient_records(bundle,selected)
@@ -71,7 +72,7 @@ c2.metric("Medications",len(select("MedicationRequest")))
 c3.metric("Lab results",len(select("Observation")))
 c4.metric("Appointments",len(select("Appointment")))
 
-tabs=st.tabs(["🏠 Overview","🧪 Labs & reports","💊 Medications","📅 Appointments","🛡️ Insurance","🔎 Record search","🚑 Contacts"])
+tabs=st.tabs(["🏠 Overview","🧪 Labs & reports","💊 Medications","📅 Appointments","🛡️ Insurance","🔎 Record search","🚑 Contacts","🧾 Care Actions"])
 with tabs[0]:
     left,right=st.columns(2)
     with left:
@@ -133,5 +134,7 @@ with tabs[6]:
         st.write("**Name:**"," ".join([*n.get("given",[]),n.get("family","")]))
         st.write("**Phone:**",r.get("telecom",[{}])[0].get("value","Not recorded"))
     st.warning("Sample phone numbers are placeholders. This application cannot contact emergency services.")
+with tabs[7]:
+    render_care_actions(bundle, selected, api_key)
 st.divider()
 st.caption("PatientPilot AI — portfolio prototype. All patient records and organizations are fictional. Not for diagnosis, treatment, or emergencies.")
