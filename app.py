@@ -2,6 +2,7 @@
 import streamlit as st
 from assistant import answer_question
 from care_ui import render_care_actions
+from navigation_ui import render_fhir_explorer, render_care_navigation
 from records import load_bundle, resources, patient_records, label, date_of, patient_name, plain_search
 
 st.set_page_config(page_title="PatientPilot AI | Demo",page_icon="🩺",layout="wide")
@@ -72,7 +73,7 @@ c2.metric("Medications",len(select("MedicationRequest")))
 c3.metric("Lab results",len(select("Observation")))
 c4.metric("Appointments",len(select("Appointment")))
 
-tabs=st.tabs(["🏠 Overview","🧪 Labs & reports","💊 Medications","📅 Appointments","🛡️ Insurance","🔎 Record search","🚑 Contacts","🧾 Care Actions"])
+tabs=st.tabs(["🏠 Overview","🧪 Labs & reports","💊 Medications","📅 Appointments","🛡️ Insurance","🔎 Record search","🚑 Contacts","🧾 Care Actions","🔗 FHIR Sandbox","🧭 Care Navigation"])
 with tabs[0]:
     left,right=st.columns(2)
     with left:
@@ -136,5 +137,9 @@ with tabs[6]:
     st.warning("Sample phone numbers are placeholders. This application cannot contact emergency services.")
 with tabs[7]:
     render_care_actions(bundle, selected, api_key)
+with tabs[8]:
+    render_fhir_explorer()
+with tabs[9]:
+    render_care_navigation(person, records)
 st.divider()
 st.caption("PatientPilot AI — portfolio prototype. All patient records and organizations are fictional. Not for diagnosis, treatment, or emergencies.")
