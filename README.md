@@ -1,6 +1,6 @@
 # PatientPilot AI — Healthcare Navigation Web App
 
-**[▶ Try the public demo](https://patientpilot-ai-dwit.streamlit.app/)** · **[Architecture](ARCHITECTURE.md)** · **[Deployment guide](DEPLOYMENT.md)** · **[CI tests](https://github.com/damndwit/patientpilot-ai-health-navigator/actions)**
+**[▶ Try the public demo](https://patientpilot-ai-dwit.streamlit.app/)** · **[Architecture](ARCHITECTURE.md)** · **[Deployment guide](DEPLOYMENT.md)** · **[CI tests](https://github.com/dwitdev/patientpilot-ai-health-navigator/actions)**
 
 > **Portfolio prototype — synthetic data only.** Not a clinical product or patient care service. No actual appointments, prescriptions, insurance transactions, or transportation bookings.
 
@@ -48,7 +48,7 @@ The repository contains FHIR-*style* resources for learning. It has not been val
 You can run the app in GitHub Codespaces, or on a local computer with Python 3.10+:
 
 ```bash
-git clone https://github.com/damndwit/patientpilot-ai-health-navigator.git
+git clone https://github.com/dwitdev/patientpilot-ai-health-navigator.git
 cd patientpilot-ai-health-navigator
 python -m pip install -r requirements.txt
 python -m streamlit run app.py
@@ -163,4 +163,4 @@ Python · Streamlit · JSON · FHIR-style resources · unittest · GitHub Action
 
 All included records are original, fabricated demo examples, not exports from a real clinical system or copied real patient data.
 
-Created by [Dwit Patel](https://github.com/damndwit).
+Created by [Dwit Patel](https://github.com/dwitdev).
