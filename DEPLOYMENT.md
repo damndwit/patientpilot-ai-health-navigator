@@ -7,7 +7,7 @@
 1. Sign in to [Streamlit Community Cloud](https://share.streamlit.io/) with GitHub.
 2. Create app → deploy an existing app from GitHub.
 3. Use these settings:
-   - Repository: `damndwit/patientpilot-ai-health-navigator`
+   - Repository: `dwitdev/patientpilot-ai-health-navigator`
    - Branch: `main`
    - Main file path: `app.py`
    - Python: **3.12** if the platform asks you to choose
